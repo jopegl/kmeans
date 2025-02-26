@@ -31,7 +31,7 @@ void loadData(double points[][D]) {
     file.close(); //closing file after using it
 }
 
-void k_means(double points[][D], int k){
+void k_means(double points[][D], int k, int nIterations){
     //initializing variables
     double centroids[100][D];
     int labels[N];
@@ -39,10 +39,7 @@ void k_means(double points[][D], int k){
     int counts[100] = {};
     double currentDist = 0, lowerDist = 0;
     int iLowerDist;
-    int nIterations;
     bool changed;
-
-
 
     //defining first centroids
     for(int i = 0; i < k; i++) {
@@ -50,9 +47,6 @@ void k_means(double points[][D], int k){
         for(int j = 0; j < D; j++)
             centroids[i][j] = points[randomIndex][j];
     }
-
-    cout << "Enter the number of iterations: ";
-    cin >> nIterations;
 
     for (int a = 0; a < nIterations; a++){
         changed = false;
@@ -124,7 +118,7 @@ void k_means(double points[][D], int k){
 
 }
 
-void runForAllComb(double points[][D], int k) {
+void runForAllComb(double points[][D], int k, int nIterations) {
     //oop that uses all combinations of data dimensions to use kmeans adapted to two dimensions, and in the end does it with all of them
     for(int i = 0; i < D; i++) {
         for(int j = i+1; j < D; j++) {
@@ -134,27 +128,29 @@ void runForAllComb(double points[][D], int k) {
                 temp[x][1] = points[x][j];
             }
             cout << "\033[32mRunning kmeans for combination " << i << " " << j << ": \033[0m" << endl;
-            k_means(temp, k);
+            k_means(temp, k, nIterations);
         }
     }
     cout << "\033[32mRunning kmeans with all dimensions: \033[0m" << endl;
-    k_means(points, k);
+    k_means(points, k, nIterations);
 }
 
 int main()
 {
     double points[N][D];
     loadData(points);
-    int k;
+    int k, nIterations;
     cout << "Digite o número de clusters: " << endl;
     cin >> k;
+    cout << "Enter the number of iterations: " << endl;
+    cin >> nIterations;
     for (int i = 0; i < N; i++){
         for (int j = 0; j < D; j++)
             cout << points[i][j] << ' ';
         cout << endl;
     }
             
-    runForAllComb(points, k);
+    runForAllComb(points, k, nIterations);
     
     return 0;
 }
