@@ -120,7 +120,7 @@ void k_means(double points[][D], int k, int nIterations){
         for(int j = 0; j < N; j++){
             if(labels[j] == i) cont++;
         }
-        cout << "Procentagem Cluster " << i << ": "<< (cont/N)* 100 << "%" << endl;
+        cout << "Percent Cluster " << i << ": "<< (cont/N)* 100 << "%" << endl;
     }
 
 }
