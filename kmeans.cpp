@@ -127,10 +127,12 @@ void runForAllComb(double points[][D], int k, int nIterations) {
                 temp[x][0] = points[x][i];
                 temp[x][1] = points[x][j];
             }
+            cin.get();
             cout << "\033[32mRunning kmeans for combination " << i << " " << j << ": \033[0m" << endl;
             k_means(temp, k, nIterations);
         }
     }
+    cin.get();
     cout << "\033[32mRunning kmeans with all dimensions: \033[0m" << endl;
     k_means(points, k, nIterations);
 }
