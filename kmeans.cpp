@@ -115,11 +115,18 @@ void k_means(double points[][D], int k, int nIterations){
     for(int i = 0; i < N; i++) {
         cout << "Modelo " << i << " : " << labels[i] << endl;
     }
+    for(int i = 0; i < k; i++) {
+        float cont = 0;
+        for(int j = 0; j < N; j++){
+            if(labels[j] == i) cont++;
+        }
+        cout << "Procentagem Cluster " << i << ": "<< (cont/N)* 100 << "%" << endl;
+    }
 
 }
 
 void runForAllComb(double points[][D], int k, int nIterations) {
-    //oop that uses all combinations of data dimensions to use kmeans adapted to two dimensions, and in the end does it with all of them
+    //loop that uses all combinations of data dimensions to use kmeans adapted to two dimensions, and in the end does it with all of them
     for(int i = 0; i < D; i++) {
         for(int j = i+1; j < D; j++) {
             double temp[N][4] = {}; //temp matrix used store temp values of current combination
@@ -153,6 +160,7 @@ int main()
     }
             
     runForAllComb(points, k, nIterations);
+    cout << "\033[0m";
     
     return 0;
 }
